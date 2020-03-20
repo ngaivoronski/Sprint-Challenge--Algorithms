@@ -96,8 +96,45 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        while True:
+            # if not holding card or space is blank - pick up card
+            if self.compare_item() == None:
+                self.swap_item()
+                # if you're in reverse and place a card into the None spot, turn the light off (to set the direction right)
+                # move one space and pick up that card
+                if self.light_is_on():
+                    self.set_light_off()
+                    self.move_right()
+                    self.swap_item()
+                    # if you can't move right, you're at the end of the list / sort
+                    # put the card back down and return l
+                    if not self.can_move_right():
+                        self.swap_item()
+                        return self._list
+            # if position card is less than held card, swap cards
+            elif self.compare_item() == 1:
+                self.swap_item()
+            elif self.compare_item() == 0:
+                pass
+            elif self.compare_item() == -1:
+                pass
+
+
+            # if light is off, move right
+            if not self.light_is_on():
+                if self.can_move_right():
+                    self.move_right()
+                # if you can't move right, turn the light on
+                else: 
+                    self.set_light_on()
+            # if light is on, move left
+            elif self.light_is_on():
+                if self.can_move_left():
+                    self.move_left()
+                # if you can't left, turn the light off
+                else:
+                    self.set_light_off()
+
 
 
 if __name__ == "__main__":
