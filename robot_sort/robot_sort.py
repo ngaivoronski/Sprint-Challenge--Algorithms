@@ -96,8 +96,56 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        # run the sort function of the robot until it's complete (provides a returned list)
+
+        # This sort function will utilize selection sort
+        while True:
+
+            ## CHECKING / SWAPPING ITEMS SECTION
+
+            # if you're not holding an item or the space you are on is blank - swap items
+            if self.compare_item() == None:
+                self.swap_item()
+                # if your direction is left and you place an item into the None spot, you have sorted your held item
+                # turn the light off(to set the direction right and move one space to the right, pick up that item, and then proceed with the rest of the sort
+                if self.light_is_on():
+                    self.set_light_off()
+                    self.move_right()
+                    self.swap_item()
+                    # if you can't move right, you're at the end of the list and the sort has completed
+                    # put the item you're holding back down and return the now sorted list
+                    if not self.can_move_right():
+                        self.swap_item()
+                        return self._list
+            # if the item at your position is less than the current held item, swap items (to get the smallest item in your inventory)
+            elif self.compare_item() == 1:
+                self.swap_item()
+            # if the item at your position is the same as the current held item, do nothing
+            elif self.compare_item() == 0:
+                pass
+            # if the item at your position is greater than the current held item, do nothing
+            elif self.compare_item() == -1:
+                pass
+
+            ## MOVEMENT / LIGHT CONTROL SECTION
+
+            # if your light is off, your direction is set to right
+            if not self.light_is_on():
+                # if you can move right, move right
+                if self.can_move_right():
+                    self.move_right()
+                # if you can't move right, turn the light on to set the direction to left
+                else: 
+                    self.set_light_on()
+            # if your light is on, your direction is set to left
+            elif self.light_is_on():
+                # if you can move left, move left
+                if self.can_move_left():
+                    self.move_left()
+                # if you can't move left, turn the light off to set the direction to right
+                else:
+                    self.set_light_off()
+
 
 
 if __name__ == "__main__":
