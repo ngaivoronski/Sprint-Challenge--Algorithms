@@ -137,7 +137,7 @@ class SortingRobot:
                 # if you can't move right, turn the light on to set the direction to left
                 else: 
                     self.set_light_on()
-            # if your light is off, your direction is set to left
+            # if your light is on, your direction is set to left
             elif self.light_is_on():
                 # if you can move left, move left
                 if self.can_move_left():
