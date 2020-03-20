@@ -21,25 +21,25 @@ This solution has a runtime of O(log2(n)) since it splits the floors in half eve
 
 Here's the actual solution:
 
-def eggTest(n, f, building=None, runs=0):
-    if not building:
-      building = [x for x in range(1,n+1)]
-    elif f > n:
-      return("f not in building")
-    elif len(building) <= 1:
-      print(f"building size: {n}")
-      print(f"number of runs: {runs}")
-      return building[0]
+    def eggTest(n, f, building=None, runs=0):
+        if not building:
+          building = [x for x in range(1,n+1)]
+        elif f > n:
+          return("f not in building")
+        elif len(building) <= 1:
+          print(f"building size: {n}")
+          print(f"number of runs: {runs}")
+          return building[0]
 
-    runs += 1
+        runs += 1
 
-    midpoint = len(building) // 2
-    lower = building[:midpoint]
-    upper = building[midpoint:]
+        midpoint = len(building) // 2
+        lower = building[:midpoint]
+        upper = building[midpoint:]
 
-    if f <= lower[-1]:
-      return eggTest(n, f, lower, runs)
-    else:
-      return eggTest(n, f, upper, runs)
+        if f <= lower[-1]:
+          return eggTest(n, f, lower, runs)
+        else:
+          return eggTest(n, f, upper, runs)
 
 
